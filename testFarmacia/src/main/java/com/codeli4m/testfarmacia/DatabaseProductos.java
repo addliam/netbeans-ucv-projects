@@ -5,6 +5,8 @@
 package com.codeli4m.testfarmacia;
 import java.sql.*;
 
+import com.codeli4m.testfarmacia.database.DbConfig;
+
 /**
  *
  * @author HP
@@ -13,7 +15,7 @@ public class DatabaseProductos {
     Connection connection;
     public DatabaseProductos() {
         System.out.println("Instanciaded Database productos!");
-        DatabaseConnection dbConnection = new DatabaseConnection();
+        DbConfig dbConnection = new DbConfig();
         connection = dbConnection.getConn();
     }
     
