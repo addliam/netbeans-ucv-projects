@@ -13,13 +13,21 @@ import com.codeli4m.testfarmacia.database.AuthenticatedUser;
 
 
 public class AdminLoginInterface extends javax.swing.JFrame {
-    
-    AuthenticatedUser authUser = null;
+    private User authUser;
+    public AuthenticatedUser authenticatedUser;
     /**
      * Creates new form AdminLoginInterface
      */
     public AdminLoginInterface() {
         initComponents();
+        // centrar ventana
+        this.setLocationRelativeTo(null);
+        // initiate database Connection
+        authUser = new User();
+    }
+    
+    public AuthenticatedUser getAuthenticatedUser(){
+        return this.authenticatedUser;
     }
     
     /**
@@ -142,14 +150,22 @@ public class AdminLoginInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = jTextFieldUser.getText();
         String password = jTextFieldPassword.getText();
-        AuthenticatedUser user = new User().authenticate(username, password);
+        // TEST if user() can instantiate db on start
+        AuthenticatedUser authenticatedUser = authUser.authenticate(username, password);
         System.out.println("--------- LOGIN BUTTON PRESSED ---------");
         System.out.println("USER: "+username);
         System.out.println("PASSWORD: "+password);
         System.out.println("---------------------------------------");
-        if (user!=null){
-            String userInformation = user.getUserInfo();
+        if (authenticatedUser!=null){
+            String userInformation = authenticatedUser.getUserInfo();
             System.out.println(userInformation);
+            // TODO: Check if user has privileges 
+            ProductosInterface productosInterface = new ProductosInterface();       
+            productosInterface.setAuthenticatedUser(authenticatedUser);
+            productosInterface.setLocationRelativeTo(null);
+            this.setVisible(false);
+            
+            productosInterface.setVisible(true);
         }else{
             jLabelMessage.setText("Credenciales incorrectas!. Intenta de nuevo");
         }
