@@ -10,6 +10,7 @@ package com.codeli4m.testfarmacia.database;
  */
 public class AuthenticatedUser {
 //    private boolean isLoggedIn = false;
+    // TODO add getters
     public String name, nickname, rol;
 
     public AuthenticatedUser(String name, String nickname, String rol) {
