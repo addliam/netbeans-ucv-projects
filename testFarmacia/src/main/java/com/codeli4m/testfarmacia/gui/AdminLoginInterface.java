@@ -10,16 +10,33 @@ package com.codeli4m.testfarmacia.gui;
  */
 import com.codeli4m.testfarmacia.database.User;
 import com.codeli4m.testfarmacia.database.AuthenticatedUser;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 
 public class AdminLoginInterface extends javax.swing.JFrame {
-    
-    AuthenticatedUser authUser = null;
+    private User authUser;
+    public AuthenticatedUser authenticatedUser;
     /**
      * Creates new form AdminLoginInterface
      */
     public AdminLoginInterface() {
         initComponents();
+        setupEnterKeyListenerLoginButton();
+        
+//        SwingUtilities.getRootPane(jButtonLogin).setDefaultButton(jButtonLogin);
+        // centrar ventana
+        this.setLocationRelativeTo(null);
+        // initiate database Connection
+        authUser = new User();
+    }
+    
+    public AuthenticatedUser getAuthenticatedUser(){
+        return this.authenticatedUser;
     }
     
     /**
@@ -69,6 +86,7 @@ public class AdminLoginInterface extends javax.swing.JFrame {
 
         jLabelMessage.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabelMessage.setForeground(java.awt.Color.red);
+        jLabelMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelMessage.setPreferredSize(new java.awt.Dimension(183, 29));
 
         jButtonLogin.setBackground(java.awt.Color.orange);
@@ -121,7 +139,7 @@ public class AdminLoginInterface extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jLabelMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(jLabelMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
@@ -137,21 +155,48 @@ public class AdminLoginInterface extends javax.swing.JFrame {
     private void jTextFieldPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPasswordActionPerformed
-
+//
+//    public void jButtonKeyPressed(java.awt.event.KeyEvent e){
+//        if (e.getKeyCode() == KeyEvent.VK_ENTER){
+//            System.out.println("PRESSED ENTER!");
+//            JOptionPane.showMessageDialog(null, "ENTER PRESSED TODO SUBMIT");
+//        }
+//    }
+    
+    private void setupEnterKeyListenerLoginButton(){
+        this.jTextFieldPassword.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                System.out.println("KEY PRESSED");
+//                if (e.getKeyCode() == KeyEvent.VK_ENTER){
+//                    System.out.println("PRESSED ENTER");}
+                    jButtonLogin.doClick();
+            };
+        });
+    }
+    
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         // TODO add your handling code here:
         String username = jTextFieldUser.getText();
         String password = jTextFieldPassword.getText();
-        AuthenticatedUser user = new User().authenticate(username, password);
+        // TEST if user() can instantiate db on start
+        AuthenticatedUser authenticatedUser = authUser.authenticate(username, password);
         System.out.println("--------- LOGIN BUTTON PRESSED ---------");
         System.out.println("USER: "+username);
         System.out.println("PASSWORD: "+password);
         System.out.println("---------------------------------------");
-        if (user!=null){
-            String userInformation = user.getUserInfo();
+        if (authenticatedUser!=null){
+            String userInformation = authenticatedUser.getUserInfo();
             System.out.println(userInformation);
+            // TODO: Check if user has privileges 
+            ProductosInterface productosInterface = new ProductosInterface();       
+            productosInterface.setAuthenticatedUser(authenticatedUser);
+            productosInterface.setLocationRelativeTo(null);
+            this.setVisible(false);
+            
+            productosInterface.setVisible(true);
         }else{
-            jLabelMessage.setText("Credenciales incorrectas!. Intenta de nuevo");
+            jLabelMessage.setText("Credenciales incorrectas!");
         }
         
         
