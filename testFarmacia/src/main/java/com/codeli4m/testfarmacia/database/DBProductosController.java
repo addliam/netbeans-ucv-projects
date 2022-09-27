@@ -7,6 +7,9 @@ package com.codeli4m.testfarmacia.database;
 import java.sql.Connection;
 import java.sql.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author HP
@@ -18,18 +21,40 @@ public class DBProductosController {
         conn = new DbConfig().getConn();
     }
 
-    public void listProducts(){
+    public List<String[]> getBasicInfoProducts(){
+        List<String[]> allProductsList = new ArrayList<String[]>();
+//        Object[] arrayObject = null;
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from productos");
-            while (rs.next()) {                
-//                System.out.println(rs);
-                System.out.println(rs.getString(2));
-//                System.out.println(rs.getInt(0));
+//                            "Codigo", "Nombre", "Precio compra", "Categoria ID", "Presentacion ID", "Stock actual", "Lote", "Fecha venc.", "Medida", "Cant. medida"};
+//            String[][] arrayObject;
+//            allProductsList.add(e);
+            ResultSet rs = stmt.executeQuery("select Producto_id, Producto_nombre, Producto_precio_compra, Categoria_id, Presentacion_id, Producto_stock_actual, Producto_lote, Producto_fecha_venc, Producto_unidad_medida, Producto_cantidad_unidades from productos");
+//            ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTOS");
+            // 10 columns            
+            while (rs.next()) {         
+                //execute each row
+                System.out.println(rs.getString(1));
+                String[] productRowList = new String[10];
+                for (int i=0;i<10;i++){
+                    productRowList[i] = rs.getString(i+1);
+                }
+                System.out.println("PRODUCT ROW LIST FINISHED");
+                allProductsList.add(productRowList);
             }
+            
+            for (int k=0;k<allProductsList.size();k++){
+                String[] rowStringArray = allProductsList.get(k);
+                String productInfo = String.join(" - ", rowStringArray);
+                System.out.println(productInfo);
+            }
+//            arrayObject = allProductsList.toArray();
+            
         } catch (Exception e) {
             System.out.println("ERROR ON LIST PRODUCTOS");
+            System.out.println(e);
         }
+        return allProductsList;
     }
     
     // return exit code
