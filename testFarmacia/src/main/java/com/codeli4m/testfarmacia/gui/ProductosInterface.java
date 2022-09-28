@@ -39,9 +39,9 @@ public class ProductosInterface extends javax.swing.JFrame {
     
     private void initProductsTableModel(){
                 String[] columnNames = {
-                "Codigo", "Nombre", "Precio compra", "Categoria ID", "Presentacion ID", "Stock actual", "Lote", "Fecha venc.", "Medida", "Cant. medida"};
+                "Codigo", "Nombre", "Precio compra", "Categoria ID", "Stock actual", "Medida", "Cant. medida"};
         Object[][] data = {
-            { "3000", "Salbutamol", "150.40", "102", "11", "60", "3688019", "2023-02-04", "unidad", "20" } // ,
+            { "3200", "Salbutamol", "150.40", "102", "60", "unidad", "20" } // ,
 //            { "2", "Cristina Torres Maldonado", "18", "3", "14", "4", "8", "4", "11.5", "12" },
 //            { "3", "Alberto Ramon Fernandez", "15", "3", "16", "4", "20", "4", "17.5", "17" }
         };        
@@ -450,45 +450,33 @@ public class ProductosInterface extends javax.swing.JFrame {
         jTableResumenProductos.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jTableResumenProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Nombre", "Precio Compra", "Categoria ID", "Presentacion ID", "Stock actual", "Lote", "Fecha vencim.", "Unidad medida", "Cantidad Medida"
+                "Codigo", "Nombre", "Precio Compra", "Categoria ID", "Stock actual", "Unidad medida", "Cantidad Medida"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTableResumenProductos.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableResumenProductos);
         if (jTableResumenProductos.getColumnModel().getColumnCount() > 0) {
             jTableResumenProductos.getColumnModel().getColumn(0).setResizable(false);
-            jTableResumenProductos.getColumnModel().getColumn(0).setHeaderValue("Codigo");
             jTableResumenProductos.getColumnModel().getColumn(1).setResizable(false);
-            jTableResumenProductos.getColumnModel().getColumn(1).setHeaderValue("Nombre");
             jTableResumenProductos.getColumnModel().getColumn(2).setResizable(false);
-            jTableResumenProductos.getColumnModel().getColumn(2).setHeaderValue("Precio Compra");
             jTableResumenProductos.getColumnModel().getColumn(3).setResizable(false);
-            jTableResumenProductos.getColumnModel().getColumn(3).setHeaderValue("Categoria ID");
             jTableResumenProductos.getColumnModel().getColumn(4).setResizable(false);
-            jTableResumenProductos.getColumnModel().getColumn(4).setHeaderValue("Presentacion ID");
             jTableResumenProductos.getColumnModel().getColumn(5).setResizable(false);
-            jTableResumenProductos.getColumnModel().getColumn(5).setHeaderValue("Stock actual");
             jTableResumenProductos.getColumnModel().getColumn(6).setResizable(false);
-            jTableResumenProductos.getColumnModel().getColumn(6).setHeaderValue("Lote");
-            jTableResumenProductos.getColumnModel().getColumn(7).setResizable(false);
-            jTableResumenProductos.getColumnModel().getColumn(7).setHeaderValue("Fecha vencim.");
-            jTableResumenProductos.getColumnModel().getColumn(8).setResizable(false);
-            jTableResumenProductos.getColumnModel().getColumn(8).setHeaderValue("Unidad medida");
-            jTableResumenProductos.getColumnModel().getColumn(9).setResizable(false);
-            jTableResumenProductos.getColumnModel().getColumn(9).setHeaderValue("Cantidad Medida");
         }
 
         jButtonAddDataTest.setBackground(java.awt.Color.green);
@@ -661,9 +649,9 @@ public class ProductosInterface extends javax.swing.JFrame {
 //            { "3009", "Salbutamol", "150.40", "102", "11", "60", "3688019", "2023-02-04", "unidad", "20" }
 //        };
                 List<String[]> testListData = new ArrayList<String[]>();
-        String[] item1= { "4004", "Salbutamol", "150.40", "102", "11", "60", "3688019", "2023-02-04", "unidad", "20" };
-        String[] item2= { "4005", "Salbutamol", "150.40", "102", "11", "60", "3688019", "2023-02-04", "unidad", "20" };
-        String[] item3= { "4006", "Salbutamol", "150.40", "102", "11", "60", "3688019", "2023-02-04", "unidad", "20" };
+        String[] item1= { "4004", "Salbutamol", "150.40", "102", "60", "unidad", "20" };
+        String[] item2= { "4005", "Salbutamol", "150.40", "102", "60", "unidad", "20" };
+        String[] item3= { "4006", "Salbutamol", "150.40", "102", "60", "unidad", "20" };
         testListData.add(item1);
         testListData.add(item2);
         testListData.add(item3);

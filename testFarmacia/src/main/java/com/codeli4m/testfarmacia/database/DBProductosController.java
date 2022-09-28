@@ -29,14 +29,14 @@ public class DBProductosController {
 //                            "Codigo", "Nombre", "Precio compra", "Categoria ID", "Presentacion ID", "Stock actual", "Lote", "Fecha venc.", "Medida", "Cant. medida"};
 //            String[][] arrayObject;
 //            allProductsList.add(e);
-            ResultSet rs = stmt.executeQuery("select Producto_id, Producto_nombre, Producto_precio_compra, Categoria_id, Presentacion_id, Producto_stock_actual, Producto_lote, Producto_fecha_venc, Producto_unidad_medida, Producto_cantidad_unidades from productos");
+            ResultSet rs = stmt.executeQuery("select Producto_id, Producto_nombre, Producto_precio_compra, Categoria_id, Producto_stock_actual, Producto_unidad_medida, Producto_cantidad_unidades from productos");
 //            ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTOS");
-            // 10 columns            
+            // 7 columns            
             while (rs.next()) {         
                 //execute each row
                 System.out.println(rs.getString(1));
                 String[] productRowList = new String[10];
-                for (int i=0;i<10;i++){
+                for (int i=0;i<7;i++){
                     productRowList[i] = rs.getString(i+1);
                 }
                 System.out.println("PRODUCT ROW LIST FINISHED");
