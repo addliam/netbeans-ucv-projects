@@ -12,10 +12,10 @@ import com.codeli4m.testfarmacia.database.User;
 import com.codeli4m.testfarmacia.database.AuthenticatedUser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+//import java.awt.event.KeyAdapter;
+//import java.awt.event.KeyEvent;
+//import javax.swing.JOptionPane;
+//import javax.swing.SwingUtilities;
 
 
 public class AdminLoginInterface extends javax.swing.JFrame {
